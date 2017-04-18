@@ -1,19 +1,8 @@
 package org.embulk.input.template
 
-import java.util.List
 import com.google.common.base.Optional
-import org.embulk.config.TaskReport
-import org.embulk.config.Config
-import org.embulk.config.ConfigDefault
-import org.embulk.config.ConfigDiff
-import org.embulk.config.ConfigSource
-import org.embulk.config.Task
-import org.embulk.config.TaskSource
-import org.embulk.spi.Exec
-import org.embulk.spi.InputPlugin
-import org.embulk.spi.PageOutput
-import org.embulk.spi.Schema
-import org.embulk.spi.SchemaConfig
+import org.embulk.config._
+import org.embulk.spi._
 object TemplateInputPlugin {
 
   trait PluginTask extends Task {
@@ -51,7 +40,6 @@ class TemplateInputPlugin extends InputPlugin {
   override def cleanup(taskSource: TaskSource, schema: Schema, taskCount: Int, successTaskReports: java.util.List[TaskReport]) = {
 
   }
-
 
   override def run(taskSource: TaskSource, schema: Schema, taskIndex: Int, output: PageOutput): TaskReport = {
     val task = taskSource.loadTask(classOf[TemplateInputPlugin.PluginTask])
