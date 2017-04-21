@@ -1,7 +1,7 @@
 plugins {
     id "com.jfrog.bintray" version "1.1"
     id "com.github.jruby-gradle.base" version "0.1.5"
-    id "java"
+    id "scala"
     id "checkstyle"
 }
 import com.github.jrubygradle.JRubyExec
@@ -15,14 +15,17 @@ configurations {
 
 version = "0.1.0"
 
-sourceCompatibility = 1.7
-targetCompatibility = 1.7
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 dependencies {
+    compile "org.scala-lang:scala-library:2.12.2"
     compile  "org.embulk:embulk-core:0.8.16"
     provided "org.embulk:embulk-core:0.8.16"
     // compile "YOUR_JAR_DEPENDENCY_GROUP:YOUR_JAR_DEPENDENCY_MODULE:YOUR_JAR_DEPENDENCY_VERSION"
     testCompile "junit:junit:4.+"
+    testCompile 'org.scalatest:scalatest_2.12:3.0.1'
+    testRuntime 'org.scala-lang.modules:scala-xml_2.12:1.0.6'
 }
 
 task classpath(type: Copy, dependsOn: ["jar"]) {
